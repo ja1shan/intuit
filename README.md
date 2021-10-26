@@ -1,65 +1,67 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+Common Ledger - Developer Task - Intuit Integration
+===================================================
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Requirements
+------
+* Docker
 
-## About Laravel
+* Developer Inruit Account
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    1. Go to this url: https://developer.intuit.com/ and register a new account.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    1. When prompted select the 'QuickBooks Online' platform.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    1. Once registered create a new app by clicking on the 'Select APIs' button in the 'Just Start Coding' pane and select the Accounting API.
 
-## Learning Laravel
+    1. When your app is created, you'll be taken to the 'My Apps' dashboard where you can select your new app.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    1. Under the 'Keys' tab on your app dashboard you'll see your development client keys as well as redirect URIs.
+    
+    1. Click on the 'Add URI' link and add http://localhost to your Redirect URIs, this will allow your local app to authenticate.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Setup
+------
 
-## Laravel Sponsors
+Update .env with `INTUIT_CLIENT_ID` and `INTUIT_CLIENT_SECRET` keys.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Run `composer install` 
 
-### Premium Partners
+`php artisan key:generate` or load http://localhost/ and generate your `APP_KEY` key
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+To run locally run  `./vendor/bin/sail up` in the root directory (Note: If you have other conflicting docker containers running already you can run `docker stop $(docker ps -a -q)`)
 
-## Contributing
+That's it, you should now be able to view the site at http://localhost/
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Notes
+-----------
 
-## Code of Conduct
+* Adding new API Entities
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    1. Add a new file (e.g. `QuickbookEntitySalesByProduct.php`) in `app/Models/QuickbooksApi/Entities/`. The class should extend `QuickbookEntity`
+    
+    1. Update the file with the required values and abstract functions
+    
+    1. Add the new Class to `QuickbooksEntityController` and call `getViewData`
 
-## Security Vulnerabilities
+* Adding new Entity type/field
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    1. Add a new file (e.g. `QuickbooksTypeTotalAmt.php)` in `app/Models/QuickbooksApi/Types/`. The class should extend `QuickbooksType`
+    
+    1. Update the file with the required values and abstract functions
+    
+* To edit and run the application
 
-## License
+    1. Run `npm install`
+    
+    2. Run `npm run dev` or `npm run watch`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Todo
+-----------
+
+* Add Create/Delete/Sparse etc. Endpoints
+
+* Add server side authentication to replace storing sensitive data in client side local storage
+
+* Add VueX for better state management
+
+* Add Vue Router to create links/routes for each page
