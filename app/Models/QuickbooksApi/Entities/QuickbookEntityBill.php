@@ -3,6 +3,7 @@
 namespace App\Models\QuickbooksApi\Entities;
 
 use App\Models\QuickbooksApi\Types\QuickbooksTypeId;
+use App\Models\QuickbooksApi\Types\QuickbooksTypeSyncToken;
 use App\Models\QuickbooksApi\Types\QuickbooksTypeVendorRef;
 
 class QuickbookEntityBill extends QuickbookEntity
@@ -12,10 +13,12 @@ class QuickbookEntityBill extends QuickbookEntity
     private const ATTRIBUTE_CLASSES = [
         QuickbooksTypeId::class,
         QuickbooksTypeVendorRef::class,
+        QuickbooksTypeSyncToken::class,
     ];
     private const REQUIRED_ATTRIBUTE_NAMES = [
         QuickbooksTypeId::NAME,
         QuickbooksTypeVendorRef::NAME,
+        QuickbooksTypeSyncToken::NAME,
     ];
 
     public function getTitle(): string {

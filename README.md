@@ -22,13 +22,17 @@ Requirements
 Setup
 ------
 
+Create an `.env` file with `cp .env.example .env`
+
 Update .env with `INTUIT_CLIENT_ID` and `INTUIT_CLIENT_SECRET` keys.
 
-Run `composer install` 
-
-`php artisan key:generate` or load http://localhost/ and generate your `APP_KEY` key
+Run `composer install --ignore-platform-reqs`
 
 To run locally run  `./vendor/bin/sail up` in the root directory (Note: If you have other conflicting docker containers running already you can run `docker stop $(docker ps -a -q)`)
+
+Open http://localhost/ to easily generate your `APP_KEY` key via your browser
+
+Refresh the page
 
 That's it, you should now be able to view the site at http://localhost/
 
@@ -57,6 +61,10 @@ Notes
 
 Todo
 -----------
+
+* Add all Entities and Attribute Types
+
+* Add all attributes types for each entities sample object
 
 * Add Create/Delete/Sparse etc. Endpoints
 

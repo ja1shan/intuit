@@ -3,6 +3,7 @@
 namespace App\Models\QuickbooksApi\Entities;
 
 use App\Models\QuickbooksApi\Types\QuickbooksTypeId;
+use App\Models\QuickbooksApi\Types\QuickbooksTypeSyncToken;
 
 class QuickbookEntityCompanyInfo extends QuickbookEntity
 {
@@ -10,9 +11,11 @@ class QuickbookEntityCompanyInfo extends QuickbookEntity
     private CONST QUERY_CONTENT_TYPE = 'application/json';
     private const ATTRIBUTE_CLASSES = [
         QuickbooksTypeId::class,
+        QuickbooksTypeSyncToken::class,
     ];
     private const REQUIRED_ATTRIBUTE_NAMES = [
         QuickbooksTypeId::NAME,
+        QuickbooksTypeSyncToken::NAME,
     ];
 
     public function getTitle(): string {
